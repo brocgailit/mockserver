@@ -8,7 +8,7 @@ module.exports = function importHandler(value, context, request) {
       .replace(/^#import (.*);/m, function (includeStatement, file) {
           const importThisFile = file.replace(/['"]/g, '');
           const content = fs.readFileSync(path.join(context, importThisFile));
-          if (importThisFile.endsWith('.js')) {
+          if (importThisFile.endsWith('.js') || importThisFile.endsWith('.ts')) {
               return JSON.stringify(eval(content.toString()));
           } else {
               return content;
